@@ -1,19 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux'
 import "./index.css";
-import App from "./components/App";
+import{ App }from "./App";
 
-import { AppReducer } from './Reducers/AppReducer';
+import { SmurfReducer } from './Reducers/SmurfReducer';
 
 const logger = ({ getState }) => (next) => (action) => {
     console.log("Dispatching action: ", action);
     next(action);
 };
   
-const store = createStore(AppReducer, applyMiddleware(logger, thunk))
+const store = createStore(SmurfReducer, applyMiddleware(logger, thunk))
 
 ReactDOM.render(
     <Provider store = {store}>
@@ -21,3 +21,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById("root")
 );
+// , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
