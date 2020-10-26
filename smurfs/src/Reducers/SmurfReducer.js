@@ -1,37 +1,38 @@
+console.log('Smurfreducer initial line');
+
 export const initialSmurfState = {
-    smurfMember: [
-        {
-            name: "Brainey",
-            age: 200,
-            height: "5cm",
-        }
-    ],
+    smurfMembers: [],
     loading: false,
 }
 
-export const SmurfReducer = (state = initialSmurfState, action) => {
+export const smurfReducer = (state = initialSmurfState, action) => {
+    console.log("smurfreducer.js action:", action);
     switch (action.type) {
         case "FETCHING_SMURF_START":
+            console.log("smurfreducer.js FETCHING_SMURF_START 23");
             return {
                 ...state, loading: true
             };
+        
         case "FETCHING_SMURF_SUCCESS":
-            const newSmurf = {name: action.payload, age: action.payload, height: action.payload}
+            console.log("smurfreducer.js FETCHING_SMURF_SUCCESS 29");
             return {
-                ...state,
-                smurfMember: [...state.smurfMember, newSmurf], loading: false
+                ...state, smurfMembers: action.payload, loading: false
             };
+        
         case "FETCHING_ERROR":
+            console.log("smurfreducer.js FETCHING_ERROR");
             return {
                 ...state, loading: false
             };
-        case "ADD_NEW_MEMBER":
-            const addSmurf = {name: action.payload, age: action.payload, height: action.payload}
+        
+        case "POST_SUCCESS":
             return {
-                ...state,
-                smurfMember: [...state.smurfMember, addSmurf], loading: false
-            }
+                ...state, smurfMembers: action.payload, loading: false
+            };
+
         default:
+            console.log("SmurfReducer.js Default State", state);
             return state;
     }
 };

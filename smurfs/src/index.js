@@ -4,16 +4,24 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux'
 import "./index.css";
-import{ App }from "./App";
+import App from "./App";
 
-import { SmurfReducer } from './Reducers/SmurfReducer';
+import { smurfReducer } from './reducers/smurfReducer';
+
+console.log('Initial Index.js');
 
 const logger = ({ getState }) => (next) => (action) => {
-    console.log("Dispatching action: ", action);
+    console.log("index.js Dispatching action: ", action);
     next(action);
-};
+  };
   
-const store = createStore(SmurfReducer, applyMiddleware(logger, thunk))
+console.log('index.js Creating Smurf Reducer Store');
+
+const store = createStore(smurfReducer, applyMiddleware(logger, thunk));
+
+console.log('index.js created store:', store);
+console.log('index.js created store.state:', store.state);
+console.log('index.js smurfReducer:', smurfReducer);
 
 ReactDOM.render(
     <Provider store = {store}>

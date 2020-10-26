@@ -1,24 +1,19 @@
-import React, { Component, useReducer } from "react";
+import React from "react";
 import "./App.css";
 import FetchSmurf from './components/FetchSmurf';
-import {SmurfContext} from './Context/SmurfContext'
-import { SmurfReducer, initialSmurfState } from './Reducers/SmurfReducer';
 
-export const App = () => {
+console.log('app.js init');
+const App = () => {
  
-  const [fetchState, fetchStateDispatch] = useReducer(SmurfReducer, initialSmurfState);
-
     return (
 
       <div className="App">
 
         <h1>SMURFS Page</h1>
+        <FetchSmurf/>
 
-        <SmurfContext.Provider value = {fetchState}>
-          <FetchSmurf dipatch={fetchStateDispatch} />
-        </SmurfContext.Provider>
-          
       </div>
       
     );
   }
+export default App;
