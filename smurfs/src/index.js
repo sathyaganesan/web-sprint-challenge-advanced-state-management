@@ -17,7 +17,7 @@ const logger = ({ getState }) => (next) => (action) => {
   
 console.log('index.js Creating Smurf Reducer Store');
 
-const store = createStore(smurfReducer, applyMiddleware(logger, thunk));
+const store = createStore(smurfReducer,  applyMiddleware(logger, thunk));
 
 console.log('index.js created store:', store);
 console.log('index.js created store.state:', store.state);
