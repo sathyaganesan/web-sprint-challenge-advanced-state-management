@@ -1,30 +1,30 @@
 import React, { useEffect } from 'react';
-import { fetchSmurfAction } from '../actions/fetchSmurfAction';
-import { addingSmurfPost } from '../actions/addNewSmurfAction';
+import { fetchSmurfAction, addingSmurfPost } from '../actions/fetchSmurfAction';
 import { connect } from 'react-redux';
-import { initialSmurfState, smurfReducer } from '../reducers/smurfReducer';
-import { useReducer } from 'react';
+import { useState } from 'react';
 
 console.log('init FetchSmurf.js')
 
 const FetchSmurf = (props) => {
     
+    const [newSmurf, setNewSmurf] = useState({name: "", age: "", height: ""})
 
     console.log("FetchSmurf.js  Props:", props);
     console.log('calling fetchsmurfaction');
 
     useEffect(() => {
         props.fetchSmurfAction();
-    }, [props.fetchSmurfAction])
-    console.log('after calling useeffect');
+    }, [props.fetchSmurfAction]);
+        console.log('after calling useeffect');
 
     const submitChange = (e) => {
         e.preventDefault();
-        props.addingSmurfPost(props.smurfMembers);
+        props.addingSmurfPost(newSmurf);
+        setNewSmurf({ name: "", age: "", height: "" });
     }
 
     const changeHandler = (e) => {
-        [e.target.name] = e.target.value;
+        setNewSmurf({ [e.target.name] : e.target.value });
     }
 
     return (
@@ -38,13 +38,13 @@ const FetchSmurf = (props) => {
                         <p>Height: {member.height}</p>
                     </div>
                 ))}
-                <form onSubmit = {submitChange}>
+                <form>
                 <div>
                     <label htmlFor="name">
                         <input
                             type="type"
                             name="name"
-                            value={props.smurfMembers.name}
+                            value={newSmurf.name}
                             onChange = {changeHandler}
                         />
                     </label>
@@ -55,7 +55,7 @@ const FetchSmurf = (props) => {
                         <input
                             type="text"
                                 name="age"
-                                value={props.smurfMembers.age}
+                                value={newSmurf.age}
                                 onChange = {changeHandler}
                             />
                     </label>
@@ -66,14 +66,14 @@ const FetchSmurf = (props) => {
                             <input
                                 type="text"
                                 name="height"
-                                value={props.smurfMembers.height}
+                                value={newSmurf.height}
                                 onChange = {changeHandler}
                             />
                     </label>
                 </div>
                     
                 <div>
-                    <button type = "submit"> Add Smurf </button>
+                        <button onClick = {() =>submitChange} > Add Smurf </button>
                 </div>
                 </form>
             </div>

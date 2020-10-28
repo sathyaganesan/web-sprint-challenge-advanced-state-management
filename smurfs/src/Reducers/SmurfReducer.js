@@ -1,7 +1,13 @@
 console.log('Smurfreducer initial line');
 
 export const initialSmurfState = {
-    smurfMembers: [],
+    smurfMembers: [
+        {
+            name: "",
+            age: "",
+            height: "",
+        }
+    ],
     loading: false,
 }
 
@@ -27,6 +33,7 @@ export const smurfReducer = (state = initialSmurfState, action) => {
             };
         
         case "POST_SUCCESS":
+            console.log("smurfreducer.js POST_SUCCESS");
             return {
                 ...state, smurfMembers: action.payload, loading: false
             };
